@@ -7,36 +7,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-function agencia_tab_scripts() {
-    // Dynamically load the Vite built assets
-    // We assume the vite build runs and outputs to /dist inside the theme folder
-    $theme_dir = get_template_directory_uri();
-    
-    // Scan the dist/assets directory for the main css and js files since Vite hashes them
+function agencia_tab_inject_vite_assets() {
     $dist_path = get_template_directory() . '/dist/assets/';
-    $dist_uri = $theme_dir . '/dist/assets/';
+    $dist_uri = get_template_directory_uri() . '/dist/assets/';
+    
+    // Inject required Google Fonts for the design
+    echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+    echo '<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">' . "\n";
 
     if ( is_dir( $dist_path ) ) {
         $files = scandir( $dist_path );
-        
         foreach( $files as $file ) {
             if ( pathinfo( $file, PATHINFO_EXTENSION ) === 'css' && strpos( $file, 'index' ) !== false ) {
-                wp_enqueue_style( 'agencia-tab-style', $dist_uri . $file, array(), filemtime( $dist_path . $file ) );
+                echo '<link rel="stylesheet" crossorigin href="' . esc_url( $dist_uri . $file ) . '">' . "\n";
             }
             if ( pathinfo( $file, PATHINFO_EXTENSION ) === 'js' && strpos( $file, 'index' ) !== false ) {
-                wp_enqueue_script( 'agencia-tab-script', $dist_uri . $file, array(), filemtime( $dist_path . $file ), true );
-                // Add type="module" to the script tag
-                add_filter( 'script_loader_tag', function( $tag, $handle, $src ) use ( $file, $dist_uri ) {
-                    if ( 'agencia-tab-script' === $handle ) {
-                        return '<script type="module" src="' . esc_url( $dist_uri . $file ) . '"></script>';
-                    }
-                    return $tag;
-                }, 10, 3 );
+                echo '<script type="module" crossorigin src="' . esc_url( $dist_uri . $file ) . '"></script>' . "\n";
             }
         }
     }
 }
-add_action( 'wp_enqueue_scripts', 'agencia_tab_scripts' );
+add_action( 'wp_head', 'agencia_tab_inject_vite_assets', 99 );
 
 // Add basic theme supports
 function agencia_tab_setup() {
