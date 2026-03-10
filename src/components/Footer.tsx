@@ -27,11 +27,11 @@ export const Footer = () => {
             <span className="uppercase tracking-widest pl-1 text-[10px]">OS Status: Online & Secure</span>
           </div>
           <div className="uppercase tracking-widest flex items-center gap-4 mt-6 text-[10px]">
-             <a href="#" className="hover:text-neon transition-colors">Instagram</a>
+             <a href="https://www.instagram.com/tab_agencia_/" target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors">Instagram</a>
              <span className="text-white/10">|</span>
-             <a href="#" className="hover:text-neon transition-colors">LinkedIn</a>
+             <a href="https://www.linkedin.com/company/agenciatab/" target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors">LinkedIn</a>
              <span className="text-white/10">|</span>
-             <a href="#" className="hover:text-neon transition-colors">Behance</a>
+             <a href="mailto:contacto@agenciatab.cl" className="hover:text-neon transition-colors">Contacto</a>
           </div>
         </div>
 
