@@ -162,7 +162,7 @@ export const portfolioProjects: PortfolioProject[] = [
     challenge:
       'Se Discipulo necesitaba una presencia web que no solo mostrara sus productos, sino que estuviera conectada directamente con su operación. El desafío era integrar un catálogo público con un sistema de gestión interna en tiempo real para optimizar la logística.',
     solution:
-      'Desarrollamos una plataforma robusta con React y Supabase. La web pública es rápida y editorial, enfocada en la conversión. Por detrás, creamos un panel administrativo (CRM) que centraliza el stock móvil y web, permitiendo al cliente gestionar todo desde una sola interfaz.',
+      'Desarrollamos una plataforma robusta con React y Supabase. La web pública es rápida y editorial, enfocada en la conversión. Por detrás, creamos un panel administrativo estilo CRM que centraliza el stock móvil y web, permitiendo al cliente gestionar todo desde una sola interfaz. El sistema permite manejar las compras, ventas, inventario, productos visibles en tienda, carritos de compras y un dashboard interactivo con todos los indicadores importantes para el negocio',
     metrics: [
       { label: 'Carga de Página', value: '< 1s' },
       { label: 'Sincronización', value: 'Tiempo Real' },
@@ -170,22 +170,22 @@ export const portfolioProjects: PortfolioProject[] = [
     ],
     gallery: [
       {
-        url: '/portfolio/sediscipulo/coverImage.png',
-        caption: 'Interfaz principal y diseño de catálogo',
+        url: '/portfolio/sediscipulo/crm.jpeg',
+        caption: 'Interfaz principal de sistema de gestión',
       },
       {
         url: '/portfolio/sediscipulo/productos.jpeg',
         caption: 'Catálogo conectado a sistema de gestión interna',
       },
       {
-        url: '/portfolio/sediscipulo/carritoCompras.png',
+        url: '/portfolio/sediscipulo/coverImage.png',
         caption: 'Experiencia optimizada en dispositivos móviles',
       },
     ],
     testimonial: {
-      quote: 'El nuevo sitio no solo es hermoso, sino que realmente vende. Es nuestro mejor comercial 24/7.',
+      quote: 'El nuevo sitio no solo es hermoso, sino que realmente vende. Además, el sistema de gestión nos permitió ahorrar muchas horas de trabajo, y salir del típico manejo de datos en excel. Nuestros clientes agradecen el profesionalismo que ahora presentamos',
       author: 'Sebastián Arancibia',
-      role: 'Marketing Manager, Cliente Demo',
+      role: 'Dueño, Se Discipulo',
     },
   },
   {
