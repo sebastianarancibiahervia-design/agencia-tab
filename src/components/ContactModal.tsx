@@ -56,21 +56,18 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+    
+    // Convert FormData to URLSearchParams for Netlify
+    const urlEncodedData = new URLSearchParams(formData as any).toString();
 
-    if (window.wpData?.rest_url) {
-      try {
-        await fetch(window.wpData.rest_url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-      } catch (err) {
-        console.error("Error submitting form", err);
-      }
-    } else {
-      // Falback simulation for local dev
-      await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: urlEncodedData,
+      });
+    } catch (err) {
+      console.error("Error submitting form", err);
     }
 
     setFormState('success');
@@ -130,7 +127,12 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} name="contact" data-netlify="true" netlify-honeypot="bot-field" className="space-y-6">
+                <input type="hidden" name="form-name" value="contact" />
+                <p className="hidden">
+                  <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                </p>
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="font-fira text-[10px] uppercase tracking-widest text-ghost/40 ml-4">Nombre Completo</label>
