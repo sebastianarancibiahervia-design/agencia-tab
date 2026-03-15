@@ -104,67 +104,67 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
           <X size={20} />
         </button>
 
-        <div className="p-8 md:p-12 relative z-10">
+        <div className="p-6 md:p-12 relative z-10 overflow-y-auto max-h-[90vh]">
           {formState === 'success' ? (
-            <div className="h-[400px] flex flex-col items-center justify-center text-center space-y-6">
+            <div className="h-[300px] md:h-[400px] flex flex-col items-center justify-center text-center space-y-6">
               <div className="w-16 h-16 rounded-full bg-neon/10 flex items-center justify-center border border-neon/30">
                 <div className="w-3 h-3 rounded-full bg-neon animate-pulse shadow-[0_0_15px_rgba(185,255,0,0.8)]"></div>
               </div>
-              <h3 className="font-instrument italic text-4xl text-neon">Conexión Establecida.</h3>
-              <p className="font-fira text-sm text-ghost/60 max-w-sm">
+              <h3 className="font-instrument italic text-3xl md:text-4xl text-neon">Conexión Establecida.</h3>
+              <p className="font-fira text-xs md:text-sm text-ghost/60 max-w-sm">
                 Hemos recibido tu información. El protocolo de inicio comenzará en breve.
               </p>
             </div>
           ) : (
             <>
-              <div className="mb-10">
-                <h2 className="font-instrument italic text-5xl md:text-6xl text-ghost leading-none mb-4">
+              <div className="mb-8 md:mb-10">
+                <h2 className="font-instrument italic text-4xl md:text-6xl text-ghost leading-tight md:leading-none mb-4">
                   Sincroniza tu<br />
                   <span className="text-neon block">visión con nuestro sistema.</span>
                 </h2>
-                <p className="font-fira text-xs text-ghost/50 uppercase tracking-widest">
+                <p className="font-fira text-[10px] text-ghost/50 uppercase tracking-widest">
                   Agencia TAB es el socio estratégico para el área de marketing
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="space-y-6">
+              <form onSubmit={handleSubmit} name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="space-y-4 md:space-y-6">
                 <input type="hidden" name="form-name" value="contact" />
                 <p className="hidden">
                   <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
                 </p>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div className="space-y-2">
                     <label className="font-fira text-[10px] uppercase tracking-widest text-ghost/40 ml-4">Nombre Completo</label>
-                    <input name="name" required type="text" className="w-full bg-[#18181B] border border-white/5 rounded-2xl px-5 py-4 text-ghost placeholder:text-ghost/20 font-sora text-sm focus:outline-none focus:border-neon/50 focus:bg-neon/5 transition-all" placeholder="John Doe" />
+                    <input name="name" required type="text" className="w-full bg-[#18181B] border border-white/5 rounded-2xl px-5 py-3 md:py-4 text-ghost placeholder:text-ghost/20 font-sora text-sm focus:outline-none focus:border-neon/50 focus:bg-neon/5 transition-all" placeholder="John Doe" />
                   </div>
                   <div className="space-y-2">
                     <label className="font-fira text-[10px] uppercase tracking-widest text-ghost/40 ml-4">Correo Electrónico</label>
-                    <input name="email" required type="email" className="w-full bg-[#18181B] border border-white/5 rounded-2xl px-5 py-4 text-ghost placeholder:text-ghost/20 font-sora text-sm focus:outline-none focus:border-neon/50 focus:bg-neon/5 transition-all" placeholder="hello@empresa.com" />
+                    <input name="email" required type="email" className="w-full bg-[#18181B] border border-white/5 rounded-2xl px-5 py-3 md:py-4 text-ghost placeholder:text-ghost/20 font-sora text-sm focus:outline-none focus:border-neon/50 focus:bg-neon/5 transition-all" placeholder="hello@empresa.com" />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div className="space-y-2">
                     <label className="font-fira text-[10px] uppercase tracking-widest text-ghost/40 ml-4">Teléfono</label>
-                    <input name="phone" required type="tel" className="w-full bg-[#18181B] border border-white/5 rounded-2xl px-5 py-4 text-ghost placeholder:text-ghost/20 font-sora text-sm focus:outline-none focus:border-neon/50 focus:bg-neon/5 transition-all" placeholder="+56 9 1234 5678" />
+                    <input name="phone" required type="tel" className="w-full bg-[#18181B] border border-white/5 rounded-2xl px-5 py-3 md:py-4 text-ghost placeholder:text-ghost/20 font-sora text-sm focus:outline-none focus:border-neon/50 focus:bg-neon/5 transition-all" placeholder="+56 9 1234 5678" />
                   </div>
                   <div className="space-y-2">
                     <label className="font-fira text-[10px] uppercase tracking-widest text-ghost/40 ml-4">Empresa (Opcional)</label>
-                    <input name="company" type="text" className="w-full bg-[#18181B] border border-white/5 rounded-2xl px-5 py-4 text-ghost placeholder:text-ghost/20 font-sora text-sm focus:outline-none focus:border-neon/50 focus:bg-neon/5 transition-all" placeholder="StartUp Inc." />
+                    <input name="company" type="text" className="w-full bg-[#18181B] border border-white/5 rounded-2xl px-5 py-3 md:py-4 text-ghost placeholder:text-ghost/20 font-sora text-sm focus:outline-none focus:border-neon/50 focus:bg-neon/5 transition-all" placeholder="StartUp Inc." />
                   </div>
                 </div>
 
                 <div className="space-y-2 pt-2">
                   <label className="font-fira text-[10px] uppercase tracking-widest text-ghost/40 ml-4">Mensaje</label>
-                  <textarea name="message" required rows={3} className="w-full bg-[#18181B] border border-white/5 rounded-2xl px-5 py-4 text-ghost placeholder:text-ghost/20 font-sora text-sm focus:outline-none focus:border-neon/50 focus:bg-neon/5 transition-all resize-none" placeholder="Describe los objetivos de tu proyecto..."></textarea>
+                  <textarea name="message" required rows={3} className="w-full bg-[#18181B] border border-white/5 rounded-2xl px-5 py-3 md:py-4 text-ghost placeholder:text-ghost/20 font-sora text-sm focus:outline-none focus:border-neon/50 focus:bg-neon/5 transition-all resize-none" placeholder="Describe los objetivos de tu proyecto..."></textarea>
                 </div>
 
-                <div className="pt-4">
+                <div className="pt-2 md:pt-4">
                   <button
                     disabled={formState === 'submitting'}
                     type="submit"
-                    className="group relative w-full overflow-hidden bg-ghost text-void-deep px-8 py-5 rounded-huge font-sora font-semibold text-xs tracking-widest uppercase transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:hover:scale-100 flex items-center justify-center"
+                    className="group relative w-full overflow-hidden bg-ghost text-void-deep px-8 py-4 md:py-5 rounded-huge font-sora font-semibold text-xs tracking-widest uppercase transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:hover:scale-100 flex items-center justify-center"
                   >
                     <span className="relative z-10 transition-colors duration-500 flex items-center gap-3">
                       {formState === 'submitting' ? (
