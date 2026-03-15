@@ -10,6 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
+    <script>
+      // Mock for local development
+      if (!window.wpData) {
+        window.wpData = {
+          logo: '/logo-tab.png',
+          hero_title: 'Toma la ventaja',
+          hero_subtitle: 'Convertimos tu pasión en una presencia visual de la que sentirte orgulloso. Deja de ser uno más y conviértete en la agencia digital de referencia en tu sector.',
+          hero_cta: 'Iniciar Proyecto',
+          contact_email: 'contacto@agenciatab.cl',
+          rrss_instagram: 'https://www.instagram.com/tab_agencia_/',
+          rrss_linkedin: 'https://www.linkedin.com/company/agenciatab/',
+          footer_text: 'La tecla que impulsa tu marca. Hacemos que la presencia digital de tu negocio sea increíble.'
+        };
+      }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

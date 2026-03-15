@@ -4,7 +4,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const Protocol = () => {
+interface ProtocolProps {
+  onOpenContact: () => void;
+}
+
+export const Protocol = ({ onOpenContact }: ProtocolProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -65,7 +69,7 @@ export const Protocol = () => {
 
       <div className="flex flex-col px-6 md:px-12 lg:px-24 max-w-6xl mx-auto relative pb-32">
         {/* Card 1 */}
-        <div className="protocol-card w-full h-[70vh] md:h-[80vh] bg-graphite/80 backdrop-blur-md rounded-huge border border-white/5 p-8 md:p-16 flex flex-col justify-between overflow-hidden relative shadow-2xl z-10 mb-[10vh]">
+        <div className="protocol-card w-full h-[70vh] md:h-[80vh] bg-graphite/80 backdrop-blur-md rounded-huge border border-white/5 p-8 md:p-16 flex flex-col justify-between overflow-hidden relative shadow-2xl z-10 mb-[40vh]">
           <div className="absolute top-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-neon/50 to-transparent opacity-50"></div>
           
           <div className="relative z-10 flex justify-between items-start">
@@ -91,7 +95,7 @@ export const Protocol = () => {
         </div>
 
         {/* Card 2 */}
-        <div className="protocol-card w-full h-[70vh] md:h-[80vh] bg-void-deep backdrop-blur-md rounded-huge border border-neon/20 p-8 md:p-16 flex flex-col justify-between overflow-hidden relative shadow-[0_-20px_50px_rgba(0,0,0,0.5)] z-20 mb-[10vh]">
+        <div className="protocol-card w-full h-[70vh] md:h-[80vh] bg-void-deep backdrop-blur-md rounded-huge border border-neon/20 p-8 md:p-16 flex flex-col justify-between overflow-hidden relative shadow-[0_-20px_50px_rgba(0,0,0,0.5)] z-20 mb-[40vh]">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-neon/10 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"></div>
           
           <div className="relative z-10 flex justify-between items-start">
@@ -130,7 +134,10 @@ export const Protocol = () => {
             <p className="font-sora text-base md:text-lg text-void-deep/80 leading-relaxed font-medium">
               Lanzamos tu página web moderna y rápida. Activamos estrategias digitales para expandir tu negocio y conseguir más clientes todos los días.
             </p>
-            <button className="mt-8 group relative overflow-hidden bg-void-deep text-ghost px-10 py-4 rounded-huge font-sora font-semibold text-xs tracking-wider uppercase transition-transform hover:scale-[1.03] active:scale-95">
+            <button 
+              onClick={onOpenContact}
+              className="mt-8 group relative overflow-hidden bg-void-deep text-ghost px-10 py-4 rounded-huge font-sora font-semibold text-xs tracking-wider uppercase transition-transform hover:scale-[1.03] active:scale-95"
+            >
               <span className="relative z-10 transition-colors duration-500">Comenzar Ahora</span>
               <div className="absolute inset-0 bg-neon translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] z-0 rounded-huge"></div>
             </button>

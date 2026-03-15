@@ -1,43 +1,52 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { Features } from './components/Features';
-import { Philosophy } from './components/Philosophy';
-import { Protocol } from './components/Protocol';
 import { Footer } from './components/Footer';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { ContactModal } from './components/ContactModal';
+import { Home } from './pages/Home';
+import { ServicePage } from './pages/ServicePage';
+import { Portfolio } from './pages/Portfolio';
+import { ProjectDetail } from './pages/ProjectDetail';
+import { Services } from './pages/Services';
 
 function App() {
-  const container = useRef<HTMLDivElement>(null);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // Future animations will go here
-    }, container);
-
-    return () => ctx.revert();
+  // Global event listener to open contact modal from any component
+  useEffect(() => {
+    const handleOpenContact = () => setIsContactOpen(true);
+    window.addEventListener('open-contact', handleOpenContact);
+    return () => window.removeEventListener('open-contact', handleOpenContact);
   }, []);
 
   return (
-    <div ref={container} className="relative min-h-screen selection:bg-neon/30 selection:text-ghost">
-      {/* Global CSS noise filter */}
-      <div className="noise-overlay" />
-      
-      <Header />
-      
-      <main>
-        <Hero />
-        <Features />
-        <Philosophy />
-        <Protocol />
-      </main>
+    <BrowserRouter>
+      <div className="relative min-h-screen selection:bg-neon/30 selection:text-ghost">
+        {/* Global CSS noise filter */}
+        <div className="noise-overlay" />
+        
+        <Header onOpenContact={() => setIsContactOpen(true)} />
+        
+        <main>
+          <Routes>
+            <Route path="/" element={<Home onOpenContact={() => setIsContactOpen(true)} />} />
+            <Route path="/servicios" element={<Services />} />
+            <Route path="/servicios/:serviceId" element={<ServicePage />} />
+            <Route path="/portafolio" element={<Portfolio />} />
+            <Route path="/portafolio/:projectId" element={<ProjectDetail />} />
+          </Routes>
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+        
+        <ContactModal 
+          isOpen={isContactOpen} 
+          onClose={() => setIsContactOpen(false)} 
+        />
+      </div>
+    </BrowserRouter>
   );
 }
 
 export default App;
+

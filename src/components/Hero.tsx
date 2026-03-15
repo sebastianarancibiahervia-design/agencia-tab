@@ -1,7 +1,11 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 
-export const Hero = () => {
+interface HeroProps {
+  onOpenContact: () => void;
+}
+
+export const Hero = ({ onOpenContact }: HeroProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   useLayoutEffect(() => {
@@ -37,15 +41,28 @@ export const Hero = () => {
           <span className="font-fira text-[10px] text-neon uppercase tracking-[0.2em]">Agencia Digital</span>
         </div>
         
-        <h1 className="hero-text text-[3.5rem] md:text-[6rem] lg:text-[8rem] xl:text-[9rem] font-sora font-semibold leading-[0.85] tracking-tighter text-ghost">
-          La tecla que<br/>
-          <span className="font-instrument italic font-normal text-neon block mt-4 lg:ml-24">impulsa tu marca.</span>
+        <h1 className="hero-text leading-[0.85] tracking-tighter">
+          <span className="block text-[3.5rem] md:text-[6rem] lg:text-[8rem] xl:text-[9rem] font-sora font-black text-ghost tracking-tighter">
+            La tecla que
+          </span>
+          <span className="block text-[3.5rem] md:text-[6rem] lg:text-[8rem] xl:text-[9rem] font-instrument italic font-normal text-neon mt-2 lg:ml-24">
+            impulsa tu marca.
+          </span>
         </h1>
         
         <div className="hero-text flex flex-col md:flex-row gap-6 md:gap-12 md:items-center mt-8">
           <p className="font-fira text-ghost/60 max-w-md text-xs md:text-sm leading-relaxed tracking-wide">
-            Diseñamos estrategias digitales completas que atraen clientes reales. Desde tus redes sociales hasta tu página web profesional.
+            Estrategia digital, identidad visual y contenido de alto impacto — todo bajo un mismo techo. Convertimos tu marca en una presencia que se siente, se recuerda y se prefiere.
           </p>
+          <button 
+            onClick={onOpenContact}
+            className="group relative overflow-hidden bg-neon text-void-deep px-8 py-4 rounded-huge font-sora font-semibold text-xs tracking-wider uppercase transition-transform hover:scale-[1.03] active:scale-95 shadow-[0_0_20px_rgba(185,255,0,0.3)] mt-4 md:mt-0"
+          >
+            <span className="relative z-10 transition-colors duration-500">
+              {window.wpData?.hero_cta || 'Iniciar Proyecto'}
+            </span>
+            <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] z-0 rounded-huge"></div>
+          </button>
         </div>
       </div>
     </section>

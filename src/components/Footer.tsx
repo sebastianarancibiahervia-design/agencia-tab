@@ -7,39 +7,34 @@ export const Footer = () => {
         <div className="space-y-6">
           <div className="flex flex-col items-start justify-center leading-none">
             <img 
-               src="/logo-tab.png" 
+               src={window.wpData?.logo || "/logo-tab.png"} 
                alt="Tab Agencia" 
-               className="w-32 h-auto drop-shadow-[0_0_15px_rgba(185,255,0,0.5)] mix-blend-screen"
+               className="w-32 h-auto drop-shadow-[0_0_15px_rgba(185,255,0,0.5)] mix-blend-screen object-contain"
                onError={(e) => {
                  e.currentTarget.style.display = 'none';
                  e.currentTarget.parentElement!.innerHTML = '<span class="font-sora font-black text-4xl tracking-tighter text-ghost drop-shadow-[0_0_15px_rgba(185,255,0,0.5)]">Tab</span><span class="font-sora font-normal text-xs tracking-widest text-ghost">agencia</span>';
                }}
             />
           </div>
-          <p className="font-fira text-xs text-ghost/40 max-w-xs leading-relaxed mt-4">
-            La tecla que impulsa tu marca. Hacemos que la presencia digital de tu negocio sea increíble.
+          <p className="font-fira text-xs text-ghost/40 max-w-xs leading-relaxed mt-4 whitespace-pre-line">
+            {window.wpData?.footer_text || 'La tecla que impulsa tu marca. Hacemos que la presencia digital de tu negocio sea increíble.'}
           </p>
         </div>
 
         <div className="flex flex-col items-start md:items-end gap-2 font-fira text-xs text-ghost/50">
-          <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/5">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.6)]"></div>
-            <span className="uppercase tracking-widest pl-1 text-[10px]">OS Status: Online & Secure</span>
-          </div>
           <div className="uppercase tracking-widest flex items-center gap-4 mt-6 text-[10px]">
-             <a href="https://www.instagram.com/tab_agencia_/" target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors">Instagram</a>
+             <a href={window.wpData?.rrss_instagram || "https://www.instagram.com/tab_agencia_/"} target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors">Instagram</a>
              <span className="text-white/10">|</span>
-             <a href="https://www.linkedin.com/company/agenciatab/" target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors">LinkedIn</a>
+             <a href={window.wpData?.rrss_linkedin || "https://www.linkedin.com/company/agenciatab/"} target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors">LinkedIn</a>
              <span className="text-white/10">|</span>
-             <a href="mailto:contacto@agenciatab.cl" className="hover:text-neon transition-colors">Contacto</a>
+             <a href={`mailto:${window.wpData?.contact_email || 'contacto@agenciatab.cl'}`} className="hover:text-neon transition-colors">Contacto</a>
           </div>
         </div>
 
       </div>
       
-      <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 font-fira text-[9px] text-ghost/30 uppercase tracking-widest">
+      <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-center items-center gap-4 font-fira text-[9px] text-ghost/30 uppercase tracking-widest">
         <span>&copy; {new Date().getFullYear()} Agencia TAB. Todos los derechos reservados.</span>
-        <span>Instrumento digital 1:1 Pixel Perfect</span>
       </div>
     </footer>
   );
