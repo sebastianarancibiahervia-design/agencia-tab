@@ -17,6 +17,7 @@ const CATEGORIES: ServiceCategory[] = [
   'diseno-web',
   'contenido-audiovisual',
   'eventos',
+  'crm',
 ];
 
 export const Portfolio = () => {
@@ -27,7 +28,7 @@ export const Portfolio = () => {
   const filtered =
     active === 'todos'
       ? portfolioProjects
-      : portfolioProjects.filter((p) => p.category === active);
+      : portfolioProjects.filter((p) => p.categories.includes(active));
 
   // Animate cards when filter changes
   useLayoutEffect(() => {

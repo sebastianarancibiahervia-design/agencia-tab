@@ -5,7 +5,8 @@ export type ServiceCategory =
   | 'branding'
   | 'diseno-web'
   | 'contenido-audiovisual'
-  | 'eventos';
+  | 'eventos'
+  | 'crm';
 
 export const categoryLabels: Record<ServiceCategory, string> = {
   todos: 'Todo',
@@ -14,6 +15,7 @@ export const categoryLabels: Record<ServiceCategory, string> = {
   'diseno-web': 'Diseño Web',
   'contenido-audiovisual': 'Audiovisual',
   eventos: 'Eventos',
+  crm: 'Sistemas',
 };
 
 // ─── Metric shown in the detail page header ──────────────────────────────────
@@ -34,7 +36,7 @@ export interface PortfolioProject {
   id: string;
   title: string;
   client: string;
-  category: Exclude<ServiceCategory, 'todos'>;
+  categories: Exclude<ServiceCategory, 'todos'>[];
   categoryLabel: string;
   description: string;  // short card description (2-3 sentences)
   coverImage: string;   // hero / card cover
@@ -68,7 +70,7 @@ export const portfolioProjects: PortfolioProject[] = [
     id: 'test-social-media',
     title: 'Test Redes Sociales',
     client: 'Cliente Demo',
-    category: 'social-media',
+    categories: ['social-media'],
     categoryLabel: 'Redes Sociales',
     description: 'Estrategia de contenido y gestión de comunidad para marca de prueba. Crecimiento orgánico sostenido y campañas de engagement de alto impacto.',
     coverImage: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1974&auto=format&fit=crop',
@@ -109,7 +111,7 @@ export const portfolioProjects: PortfolioProject[] = [
     id: 'test-branding',
     title: 'Test Branding',
     client: 'Cliente Demo',
-    category: 'branding',
+    categories: ['branding'],
     categoryLabel: 'Branding',
     description: 'Construcción de identidad visual completa: logotipo, paleta cromática, tipografía y manual de marca con guidelines aplicados a todos los touchpoints digitales.',
     coverImage: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?q=80&w=2070&auto=format&fit=crop',
@@ -146,43 +148,43 @@ export const portfolioProjects: PortfolioProject[] = [
     },
   },
   {
-    id: 'test-diseno-web',
-    title: 'Test Diseño Web',
-    client: 'Cliente Demo',
-    category: 'diseno-web',
-    categoryLabel: 'Diseño Web',
-    description: 'Diseño y desarrollo de sitio web corporativo con CMS a medida. Score de PageSpeed 97/100, UX basado en datos y arquitectura optimizada para conversión.',
-    coverImage: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2064&auto=format&fit=crop',
-    tags: ['WordPress', 'UX Design', 'SEO Técnico'],
-    year: '2025',
-    duration: '8 semanas',
-    resultUrl: 'https://example.com',
+    id: 'se-discipulo-web-y-crm',
+    title: 'Se Discipulo - Página Web y Sistema de gestión',
+    client: 'Se Discipulo',
+    categories: ['diseno-web', 'crm'],
+    categoryLabel: 'Web + CRM',
+    description: 'Ecosistema digital completo para Se Discipulo. Incluye landing page de alta conversión y un sistema de gestión interna (CRM) para el control de inventario y pedidos.',
+    coverImage: '/portfolio/sediscipulo/coverImage.png',
+    tags: ['Web', 'UX/UI Design', 'Sístema de gestión', 'CRM'],
+    year: '2026',
+    duration: '3 semanas',
+    resultUrl: 'https://sediscipulo.cl',
     challenge:
-      'El sitio anterior era lento (PageSpeed 42/100), no era responsive y la tasa de rebote superaba el 80%. El cliente perdía prospectos por no convertir la visita en contacto.',
+      'Se Discipulo necesitaba una presencia web que no solo mostrara sus productos, sino que estuviera conectada directamente con su operación. El desafío era integrar un catálogo público con un sistema de gestión interna en tiempo real para optimizar la logística.',
     solution:
-      'Diseñamos desde wireframes basados en heatmaps del sitio anterior. Desarrollamos un tema WordPress a medida con Gutenberg blocks personalizados, integración SEO técnica y Core Web Vitals optimizados. El sitio nuevo convierte 3x más.',
+      'Desarrollamos una plataforma robusta con React y Supabase. La web pública es rápida y editorial, enfocada en la conversión. Por detrás, creamos un panel administrativo (CRM) que centraliza el stock móvil y web, permitiendo al cliente gestionar todo desde una sola interfaz.',
     metrics: [
-      { label: 'PageSpeed Score', value: '97/100' },
-      { label: 'Tasa de Rebote', value: '-52%' },
-      { label: 'Tasa de Conversión', value: '+180%' },
+      { label: 'Carga de Página', value: '< 1s' },
+      { label: 'Sincronización', value: 'Tiempo Real' },
+      { label: 'Optimización UX', value: '100%' },
     ],
     gallery: [
       {
-        url: 'https://images.unsplash.com/photo-1502945015378-0e284ca1a5be?q=80&w=2070&auto=format&fit=crop',
-        caption: 'Diseño de la página principal',
+        url: '/portfolio/sediscipulo/coverImage.png',
+        caption: 'Interfaz principal y diseño de catálogo',
       },
       {
-        url: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
-        caption: 'Vista responsiva en móvil',
+        url: '/portfolio/sediscipulo/productos.jpeg',
+        caption: 'Catálogo conectado a sistema de gestión interna',
       },
       {
-        url: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=2076&auto=format&fit=crop',
-        caption: 'Dashboard de analítica post-lanzamiento',
+        url: '/portfolio/sediscipulo/carritoCompras.png',
+        caption: 'Experiencia optimizada en dispositivos móviles',
       },
     ],
     testimonial: {
       quote: 'El nuevo sitio no solo es hermoso, sino que realmente vende. Es nuestro mejor comercial 24/7.',
-      author: 'María González',
+      author: 'Sebastián Arancibia',
       role: 'Marketing Manager, Cliente Demo',
     },
   },
@@ -190,7 +192,7 @@ export const portfolioProjects: PortfolioProject[] = [
     id: 'test-audiovisual',
     title: 'Test Contenido Audiovisual',
     client: 'Cliente Demo',
-    category: 'contenido-audiovisual',
+    categories: ['contenido-audiovisual'],
     categoryLabel: 'Audiovisual',
     description: 'Producción de campaña fotográfica y video aspiracional para lanzamiento de producto. Dirección de arte, rodaje en locación y post-producción.',
     coverImage: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2070&auto=format&fit=crop',
@@ -231,7 +233,7 @@ export const portfolioProjects: PortfolioProject[] = [
     id: 'test-eventos',
     title: 'Test Eventos',
     client: 'Cliente Demo',
-    category: 'eventos',
+    categories: ['eventos'],
     categoryLabel: 'Eventos',
     description: 'Cobertura integral de activación de marca: fotografía profesional, video highlights y gestión de social media en tiempo real durante el evento.',
     coverImage: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop',
