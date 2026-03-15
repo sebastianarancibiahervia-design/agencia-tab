@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -6,10 +6,16 @@ import { portfolioProjects } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const X = ({ size = 24, className = '' }: any) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+);
+
 export const ProjectDetail = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const project = portfolioProjects.find((p) => p.id === projectId);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+  const lightboxRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -72,6 +78,17 @@ export const ProjectDetail = () => {
     return () => ctx.revert();
   }, [project]);
 
+  // Handle Lightbox animation
+  useEffect(() => {
+    if (activeImage) {
+      gsap.to(lightboxRef.current, { autoAlpha: 1, duration: 0.4, ease: 'power2.out' });
+      document.body.style.overflow = 'hidden';
+    } else {
+      gsap.to(lightboxRef.current, { autoAlpha: 0, duration: 0.3, ease: 'power2.in' });
+      document.body.style.overflow = '';
+    }
+  }, [activeImage]);
+
   if (!project) return <Navigate to="/portafolio" replace />;
 
   return (
@@ -80,19 +97,26 @@ export const ProjectDetail = () => {
       {/* ──────────────── HERO ──────────────── */}
       <section className="relative min-h-[90vh] flex flex-col justify-end overflow-hidden">
         {/* Background cover image */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 cursor-zoom-in group" onClick={() => setActiveImage(project.coverImage)}>
           <img
             src={project.coverImage}
             alt={project.title}
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-1000"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-void-deep via-void-deep/70 to-void-deep/20" />
+          
+          {/* Zoom hint */}
+          <div className="absolute bottom-10 right-10 z-20 opacity-0 group-hover:opacity-100 transition-opacity bg-void-deep/40 backdrop-blur-md p-3 rounded-full border border-white/10 hidden md:block">
+            <svg className="w-5 h-5 text-neon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+            </svg>
+          </div>
         </div>
 
         {/* Hero content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pb-20 pt-40 hero-content">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pb-20 pt-40 hero-content pointer-events-none">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 mb-6">
+          <div className="flex items-center gap-2 mb-6 pointer-events-auto">
             <Link
               to="/portafolio"
               className="text-ghost/50 font-fira text-xs uppercase tracking-widest hover:text-neon transition-colors"
@@ -106,18 +130,18 @@ export const ProjectDetail = () => {
           </div>
 
           {/* Category badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neon/30 bg-neon/10 text-neon text-xs font-fira uppercase tracking-widest mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neon/30 bg-neon/10 text-neon text-xs font-fira uppercase tracking-widest mb-6 pointer-events-auto">
             <span className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse" />
             {project.categoryLabel}
           </div>
 
           {/* Title */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-instrument text-ghost leading-[1.05] mb-6 max-w-4xl">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-instrument text-ghost leading-[1.05] mb-6 max-w-4xl pointer-events-auto">
             {project.title}
           </h1>
 
           {/* Meta row */}
-          <div className="flex flex-wrap gap-8 items-center">
+          <div className="flex flex-wrap gap-8 items-center pointer-events-auto">
             <div>
               <p className="text-ghost/40 font-fira text-[10px] uppercase tracking-widest mb-1">Cliente</p>
               <p className="text-ghost font-sora font-medium">{project.client}</p>
@@ -144,7 +168,7 @@ export const ProjectDetail = () => {
 
           {/* Ver resultado CTA */}
           {project.resultUrl && (
-            <div className="mt-8">
+            <div className="mt-8 pointer-events-auto">
               <a
                 href={project.resultUrl}
                 target="_blank"
@@ -218,7 +242,8 @@ export const ProjectDetail = () => {
             {project.gallery.map((img, i) => (
               <div
                 key={i}
-                className={`gallery-img relative rounded-[2rem] overflow-hidden group ${
+                onClick={() => setActiveImage(img.url)}
+                className={`gallery-img relative rounded-[2rem] overflow-hidden group cursor-zoom-in ${
                   i === 0 ? 'md:col-span-2 row-span-1' : ''
                 }`}
               >
@@ -228,10 +253,16 @@ export const ProjectDetail = () => {
                     alt={img.caption || `Imagen ${i + 1}`}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-void-deep/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-void-deep/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-void-deep/50 backdrop-blur-md border border-white/10 flex items-center justify-center transform scale-90 group-hover:scale-100 transition-transform">
+                      <svg className="w-6 h-6 text-neon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
                 {img.caption && (
-                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-void-deep/60 backdrop-blur-sm border-t border-white/5">
                     <p className="text-ghost/80 font-fira text-xs uppercase tracking-widest">
                       {img.caption}
                     </p>
@@ -242,6 +273,31 @@ export const ProjectDetail = () => {
           </div>
         </section>
       )}
+
+      {/* ──────────────── LIGHTBOX ──────────────── */}
+      <div
+        ref={lightboxRef}
+        onClick={() => setActiveImage(null)}
+        className="fixed inset-0 z-[200] bg-void-deep/95 backdrop-blur-3xl invisible flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
+      >
+        <button
+          onClick={(e) => { e.stopPropagation(); setActiveImage(null); }}
+          className="absolute top-8 right-8 p-3 rounded-full bg-white/5 text-ghost/60 hover:text-neon hover:bg-white/10 transition-colors z-[210]"
+        >
+          <X size={24} />
+        </button>
+
+        <div className="relative w-full h-full flex items-center justify-center">
+          {activeImage && (
+            <img
+              src={activeImage}
+              alt="Preview"
+              className="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          )}
+        </div>
+      </div>
 
       {/* ──────────────── TESTIMONIAL ──────────────── */}
       {project.testimonial && (
@@ -303,3 +359,4 @@ export const ProjectDetail = () => {
     </div>
   );
 };
+
