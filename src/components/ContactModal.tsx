@@ -127,7 +127,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} name="contact" data-netlify="true" netlify-honeypot="bot-field" className="space-y-6">
+              <form onSubmit={handleSubmit} name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="space-y-6">
                 <input type="hidden" name="form-name" value="contact" />
                 <p className="hidden">
                   <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
