@@ -47,7 +47,6 @@ export const Header = ({ onOpenContact }: HeaderProps) => {
   const navLinks = [
     { label: 'Servicios', path: '/servicios' },
     { label: 'Portafolio', path: '/portafolio' },
-    { label: 'Nuestra Misión', path: '/#filosofia' },
     { label: 'Forma de Trabajo', path: '/#protocolo' },
   ];
 
@@ -121,7 +120,6 @@ export const Header = ({ onOpenContact }: HeaderProps) => {
 
           {/* Sectional anchors */}
           {[
-            { label: 'Nuestra Misión',  path: '/#filosofia' },
             { label: 'Forma de Trabajo', path: '/#protocolo' },
           ].map((item) => (
             <a
