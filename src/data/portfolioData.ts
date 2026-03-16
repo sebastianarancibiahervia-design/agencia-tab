@@ -179,7 +179,7 @@ export const portfolioProjects: PortfolioProject[] = [
       },
       {
         url: '/portfolio/sediscipulo/coverImage.jpeg',
-        caption: 'Experiencia optimizada en dispositivos móviles',
+        caption: 'Página Web',
       },
     ],
     testimonial: {
