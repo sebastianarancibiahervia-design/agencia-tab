@@ -178,7 +178,7 @@ export const portfolioProjects: PortfolioProject[] = [
         caption: 'Catálogo conectado a sistema de gestión interna',
       },
       {
-        url: '/portfolio/sediscipulo/coverImage.png',
+        url: '/portfolio/sediscipulo/coverImage.jpeg',
         caption: 'Experiencia optimizada en dispositivos móviles',
       },
     ],
