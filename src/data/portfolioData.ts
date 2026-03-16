@@ -154,7 +154,7 @@ export const portfolioProjects: PortfolioProject[] = [
     categories: ['diseno-web', 'crm'],
     categoryLabel: 'Web + CRM',
     description: 'Ecosistema digital completo para Se Discipulo. Incluye página web y un sistema de gestión interna.',
-    coverImage: '/portfolio/sediscipulo/coverImage.png',
+    coverImage: '/portfolio/sediscipulo/coverImage.jpeg',
     tags: ['Web', 'UX/UI Design', 'Sístema de gestión', 'CRM'],
     year: '2026',
     duration: '3 semanas',
