@@ -1,0 +1,29 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteRule ^mailer\.php$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-e
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# Aggressive Cache Prevention
+<IfModule mod_headers.c>
+    # Disable cache for all HTML and PHP files
+    <FilesMatch "\.(html|htm|php)$">
+        Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+    </FilesMatch>
+
+    # Disable ETag to prevent conditional requests
+    Header unset ETag
+    FileETag None
+</IfModule>
+
+# Disable caching for the root domain explicitly
+<FilesMatch "^$">
+    Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+</FilesMatch>

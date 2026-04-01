@@ -134,6 +134,14 @@ export const Header = ({ onOpenContact }: HeaderProps) => {
 
         {/* ─── Actions ─── */}
         <div className="flex items-center gap-4">
+          <a
+            href="https://intranet.app.agenciatab.cl"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:flex items-center gap-2 text-xs uppercase tracking-widest font-fira text-ghost/60 hover:text-neon transition-colors py-2 mr-2"
+          >
+            Intranet
+          </a>
           <button
             onClick={onOpenContact}
             className="hidden md:block group relative overflow-hidden bg-ghost text-void-deep px-8 py-3 rounded-huge font-sora font-semibold text-xs tracking-wider uppercase transition-transform hover:scale-[1.03] active:scale-95"
@@ -169,12 +177,22 @@ export const Header = ({ onOpenContact }: HeaderProps) => {
             </Link>
           ))}
           
+          <a
+            href="https://intranet.app.agenciatab.cl"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsMenuOpen(false)}
+            className="text-2xl font-fira uppercase tracking-widest text-ghost/60 hover:text-neon transition-colors"
+          >
+            Intranet
+          </a>
+
           <button
             onClick={() => {
               setIsMenuOpen(false);
               onOpenContact();
             }}
-            className="w-full mt-8 group relative overflow-hidden bg-ghost text-void-deep px-8 py-5 rounded-huge font-sora font-semibold text-sm tracking-wider uppercase transition-transform active:scale-95"
+            className="w-full mt-4 group relative overflow-hidden bg-ghost text-void-deep px-8 py-5 rounded-huge font-sora font-semibold text-sm tracking-wider uppercase transition-transform active:scale-95"
           >
             <span className="relative z-10">Contactar</span>
             <div className="absolute inset-0 bg-neon translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] z-0" />

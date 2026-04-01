@@ -56,18 +56,19 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
-    
-    // Convert FormData to URLSearchParams for Netlify
     const urlEncodedData = new URLSearchParams(formData as any).toString();
 
     try {
-      await fetch("/", {
+      const res = await fetch("/mailer.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: urlEncodedData,
       });
+      if (!res.ok) {
+        console.error("Error al enviar formulario:", await res.text());
+      }
     } catch (err) {
-      console.error("Error submitting form", err);
+      console.error("Error de red al enviar formulario:", err);
     }
 
     setFormState('success');
@@ -127,11 +128,8 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="space-y-4 md:space-y-6">
-                <input type="hidden" name="form-name" value="contact" />
-                <p className="hidden">
-                  <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-                </p>
+              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                <input type="hidden" name="bot-field" style={{display:"none"}} aria-hidden="true" />
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div className="space-y-2">

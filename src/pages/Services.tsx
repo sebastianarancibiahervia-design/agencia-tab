@@ -152,16 +152,6 @@ export const Services = () => {
                 <p className="text-ghost/60 font-sora font-light text-sm leading-relaxed line-clamp-2">
                   {service.heroSubcopy}
                 </p>
-
-                {/* Stats preview */}
-                <div className="flex gap-4 pt-2 border-t border-white/5">
-                  {service.stats.slice(0, 2).map((s) => (
-                    <div key={s.label} className="flex flex-col">
-                      <span className="font-fira text-neon text-sm font-medium">{s.value}</span>
-                      <span className="font-fira text-ghost/30 text-[9px] uppercase tracking-widest">{s.label}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
             </Link>
           ))}

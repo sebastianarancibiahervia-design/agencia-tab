@@ -28,6 +28,8 @@ export const Footer = () => {
              <a href={window.wpData?.rrss_linkedin || "https://www.linkedin.com/company/agenciatab/"} target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors">LinkedIn</a>
              <span className="text-white/10">|</span>
              <a href={`mailto:${window.wpData?.contact_email || 'contacto@agenciatab.cl'}`} className="hover:text-neon transition-colors">Contacto</a>
+             <span className="text-white/10">|</span>
+             <a href="https://intranet.app.agenciatab.cl" target="_blank" rel="noopener noreferrer" className="hover:text-neon transition-colors">Intranet</a>
           </div>
         </div>
 
